@@ -2,6 +2,7 @@ import { useHealthData } from "@/hooks/use-health-data";
 import { useAlertSystem } from "@/hooks/use-alert-system";
 import { EmergencyButton } from "@/components/emergency-button";
 import { HealthCard } from "@/components/health-card";
+import { MedicineReminders } from "@/components/medicine-reminders";
 import { Card, CardContent } from "@/components/ui/card";
 import { localStorageService } from "@/lib/storage";
 import { useEffect } from "react";
@@ -99,6 +100,9 @@ export function Dashboard() {
 
       {/* Emergency SOS Button */}
       <EmergencyButton />
+
+      {/* Medicine Reminders */}
+      <MedicineReminders />
 
       {/* Real-time Health Monitoring - Mobile Optimized */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">

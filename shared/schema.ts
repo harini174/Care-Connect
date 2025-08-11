@@ -29,6 +29,29 @@ export const settings = pgTable("settings", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+export const medicineReminders = pgTable("medicine_reminders", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  dosage: text("dosage").notNull(),
+  times: text("times").notNull(), // JSON string of time array
+  startDate: text("start_date").notNull(),
+  endDate: text("end_date"),
+  notes: text("notes"),
+  isActive: text("is_active").default("true"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const medicineLogs = pgTable("medicine_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  medicineId: varchar("medicine_id").notNull(),
+  medicineName: text("medicine_name").notNull(),
+  scheduledTime: text("scheduled_time").notNull(),
+  actualTime: text("actual_time"),
+  status: text("status").notNull(), // 'taken', 'missed', 'late'
+  notes: text("notes"),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -44,9 +67,46 @@ export const insertSettingsSchema = createInsertSchema(settings).omit({
   updatedAt: true,
 });
 
+export const insertMedicineReminderSchema = createInsertSchema(medicineReminders).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertMedicineLogSchema = createInsertSchema(medicineLogs).omit({
+  id: true,
+  timestamp: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type Alert = typeof alerts.$inferSelect;
 export type InsertAlert = z.infer<typeof insertAlertSchema>;
 export type Settings = typeof settings.$inferSelect;
 export type InsertSettings = z.infer<typeof insertSettingsSchema>;
+export type MedicineReminder = typeof medicineReminders.$inferSelect;
+export type InsertMedicineReminder = z.infer<typeof insertMedicineReminderSchema>;
+export type MedicineLog = typeof medicineLogs.$inferSelect;
+export type InsertMedicineLog = z.infer<typeof insertMedicineLogSchema>;
+
+// Local interfaces for client-side medicine management
+export interface LocalMedicineReminder {
+  id: string;
+  name: string;
+  dosage: string;
+  times: string[]; // Array of time strings like ["08:00", "14:00", "20:00"]
+  startDate: string;
+  endDate?: string;
+  notes?: string;
+  isActive: boolean;
+}
+
+export interface LocalMedicineLog {
+  id: string;
+  medicineId: string;
+  medicineName: string;
+  scheduledTime: string;
+  actualTime?: string;
+  status: "taken" | "missed" | "late";
+  notes?: string;
+  timestamp: string;
+}

@@ -8,6 +8,7 @@ import { Navigation } from "@/components/navigation";
 import { Dashboard } from "@/pages/dashboard";
 import { Settings } from "@/pages/settings";
 import { History } from "@/pages/history";
+import { Medicines } from "@/pages/medicines";
 
 function App() {
   const [currentView, setCurrentView] = useState("dashboard");
@@ -15,9 +16,11 @@ function App() {
   const renderCurrentView = () => {
     switch (currentView) {
       case "settings":
-        return <Settings onBack={() => setCurrentView("dashboard")} />;
+        return <Settings onBack={() => setCurrentView("dashboard")} onNavigate={setCurrentView} />;
       case "history":
         return <History onBack={() => setCurrentView("dashboard")} />;
+      case "medicines":
+        return <Medicines onBack={() => setCurrentView("settings")} />;
       default:
         return <Dashboard />;
     }

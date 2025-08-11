@@ -17,6 +17,8 @@ export interface LocalAlert {
 
 const SETTINGS_KEY = 'careconnect-settings';
 const ALERTS_KEY = 'careconnect-alerts';
+const MEDICINE_REMINDERS_KEY = 'careconnect-medicine-reminders';
+const MEDICINE_LOGS_KEY = 'careconnect-medicine-logs';
 
 // Default caregiver information - automatically set up for the user
 const getDefaultSettings = (): LocalSettings => ({
@@ -100,8 +102,67 @@ export const localStorageService = {
     } catch (error) {
       console.error('Failed to clear alerts:', error);
     }
+  },
+
+  // Medicine Reminders methods
+  getMedicineReminders(): LocalMedicineReminder[] {
+    try {
+      const stored = localStorage.getItem(MEDICINE_REMINDERS_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  },
+
+  saveMedicineReminders(reminders: LocalMedicineReminder[]): void {
+    try {
+      localStorage.setItem(MEDICINE_REMINDERS_KEY, JSON.stringify(reminders));
+    } catch (error) {
+      console.error('Failed to save medicine reminders:', error);
+    }
+  },
+
+  // Medicine Logs methods
+  getMedicineLogs(): LocalMedicineLog[] {
+    try {
+      const stored = localStorage.getItem(MEDICINE_LOGS_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  },
+
+  saveMedicineLogs(logs: LocalMedicineLog[]): void {
+    try {
+      localStorage.setItem(MEDICINE_LOGS_KEY, JSON.stringify(logs));
+    } catch (error) {
+      console.error('Failed to save medicine logs:', error);
+    }
   }
 };
+
+// Medicine reminder types
+export interface LocalMedicineReminder {
+  id: string;
+  name: string;
+  dosage: string;
+  times: string[];
+  startDate: string;
+  endDate?: string;
+  notes?: string;
+  isActive: boolean;
+}
+
+export interface LocalMedicineLog {
+  id: string;
+  medicineId: string;
+  medicineName: string;
+  scheduledTime: string;
+  actualTime?: string;
+  status: "taken" | "missed" | "late";
+  notes?: string;
+  timestamp: string;
+}
 
 // GPS simulation
 export const getSimulatedLocation = (): string => {

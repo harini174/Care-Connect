@@ -10,9 +10,10 @@ import { useToast } from "@/hooks/use-toast";
 
 interface SettingsProps {
   onBack: () => void;
+  onNavigate: (view: string) => void;
 }
 
-export function Settings({ onBack }: SettingsProps) {
+export function Settings({ onBack, onNavigate }: SettingsProps) {
   const [settings, setSettings] = useState<LocalSettings>({
     caregiverName: "",
     caregiverPhone: "",
@@ -64,6 +65,29 @@ export function Settings({ onBack }: SettingsProps) {
         </Button>
         <h2 className="elderly-text-xl font-bold text-gray-900">Settings</h2>
       </div>
+
+      {/* Medicine Management Link */}
+      <Card className="mobile-card border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
+                <i className="fas fa-pills text-blue-600 text-xl"></i>
+              </div>
+              <div>
+                <h3 className="elderly-text font-bold text-foreground">Medicine Reminders</h3>
+                <p className="text-muted-foreground font-medium">Manage your daily medicines</p>
+              </div>
+            </div>
+            <Button 
+              onClick={() => onNavigate("medicines")}
+              className="elderly-button bg-blue-600 hover:bg-blue-700 text-white px-6 py-3"
+            >
+              Manage
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Caregiver Contact Settings */}
       <Card className="card-modern border-l-4 border-success bg-gradient-to-r from-green-50 to-emerald-50">
