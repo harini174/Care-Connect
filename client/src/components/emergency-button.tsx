@@ -18,26 +18,31 @@ export function EmergencyButton() {
   };
 
   return (
-    <Card className="card-modern border-l-4 border-critical bg-gradient-to-r from-red-50 to-pink-50">
-      <CardContent className="p-8">
+    <Card className="mobile-card border-l-4 border-critical bg-gradient-to-r from-red-50 to-pink-50 shadow-xl">
+      <CardContent className="p-6 md:p-8">
         <div className="text-center">
           <Button
             onClick={handleEmergencyClick}
             disabled={isEmergencyPending}
-            className="elderly-button button-critical w-full sm:w-auto min-h-[96px] text-2xl font-bold"
+            className="emergency-btn-mobile button-critical border-4 border-white/30 pulse-animation"
             aria-label="Emergency SOS Button - Press to send immediate help alert"
           >
             <div className="flex flex-col items-center">
-              <i className="fas fa-phone-alt text-4xl mb-3"></i>
-              <div>{isEmergencyPending ? "SENDING..." : "EMERGENCY SOS"}</div>
-              <div className="text-lg font-normal opacity-90">
-                {isEmergencyPending ? "Please wait..." : "Press for Help"}
+              <i className="fas fa-phone-alt text-5xl md:text-4xl mb-3 animate-pulse"></i>
+              <div className="text-3xl md:text-2xl leading-tight">
+                {isEmergencyPending ? "SENDING..." : "EMERGENCY"}
+              </div>
+              <div className="text-3xl md:text-2xl font-black">
+                {isEmergencyPending ? "PLEASE WAIT" : "SOS"}
+              </div>
+              <div className="text-xl md:text-lg font-normal opacity-90 mt-2">
+                {isEmergencyPending ? "Contacting caregiver..." : "Tap for Immediate Help"}
               </div>
             </div>
           </Button>
         </div>
-        <p className="text-center text-muted-foreground elderly-text mt-6 font-medium">
-          This will immediately alert your caregiver with your location
+        <p className="text-center text-muted-foreground elderly-text mt-6 font-bold leading-relaxed">
+          This will immediately alert Dr. Sarah Johnson with your exact location
         </p>
       </CardContent>
     </Card>

@@ -32,24 +32,24 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
         </div>
       </header>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-border/30 px-4 py-2 z-30 shadow-lg">
+      {/* Mobile-First Bottom Navigation */}
+      <nav className="mobile-nav">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => onViewChange(item.id)}
                 className={cn(
-                  "flex flex-col items-center py-4 px-3 rounded-2xl transition-all duration-300 transform",
+                  "mobile-nav-item flex flex-col items-center rounded-2xl transition-all duration-300 transform touch-manipulation",
                   currentView === item.id
-                    ? "text-white bg-gradient-to-r from-primary to-blue-600 shadow-lg scale-105"
-                    : "text-muted-foreground hover:text-primary hover:bg-muted hover:scale-105"
+                    ? "text-white bg-gradient-to-r from-primary to-blue-600 shadow-lg scale-105 border-t-4 border-blue-200"
+                    : "text-muted-foreground hover:text-primary hover:bg-muted active:scale-95"
                 )}
                 aria-label={item.label}
               >
-                <i className={`${item.icon} text-2xl mb-1`}></i>
-                <span className="text-sm font-semibold">{item.label}</span>
+                <i className={`${item.icon} text-3xl mb-2 transition-transform duration-200`}></i>
+                <span className="elderly-text-xs font-bold leading-tight">{item.label}</span>
               </button>
             ))}
           </div>
