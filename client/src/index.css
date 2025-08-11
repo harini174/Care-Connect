@@ -183,18 +183,48 @@
     @apply transform transition-transform duration-300 ease-out;
   }
   
-  /* Pulse animation for emergency button */
+  /* Enhanced pulse animation for emergency button */
   .pulse-animation {
-    animation: pulse-glow 2s infinite;
+    animation: emergency-pulse 1.5s infinite;
   }
   
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+  @keyframes emergency-pulse {
+    0% {
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.6), 0 0 60px rgba(220, 38, 38, 0.4), 0 0 90px rgba(220, 38, 38, 0.2);
+      transform: scale(1);
     }
     50% {
-      box-shadow: 0 0 40px rgba(220, 38, 38, 0.6), 0 0 60px rgba(220, 38, 38, 0.3);
+      box-shadow: 0 0 60px rgba(220, 38, 38, 0.9), 0 0 120px rgba(220, 38, 38, 0.6), 0 0 180px rgba(220, 38, 38, 0.3);
+      transform: scale(1.05);
     }
+    100% {
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.6), 0 0 60px rgba(220, 38, 38, 0.4), 0 0 90px rgba(220, 38, 38, 0.2);
+      transform: scale(1);
+    }
+  }
+  
+  /* Emergency button specific enhancements */
+  .emergency-enhanced {
+    position: relative;
+    overflow: visible;
+  }
+  
+  .emergency-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+    border-radius: 3rem;
+    animation: emergency-glow 2s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes emergency-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
   }
   
   /* Vibration effect for emergency scenarios */
