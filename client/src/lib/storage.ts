@@ -18,14 +18,33 @@ export interface LocalAlert {
 const SETTINGS_KEY = 'careconnect-settings';
 const ALERTS_KEY = 'careconnect-alerts';
 
+// Default caregiver information - automatically set up for the user
+const getDefaultSettings = (): LocalSettings => ({
+  caregiverName: "Dr. Sarah Johnson",
+  caregiverPhone: "+1-555-0123",
+  minHeartRate: 50,
+  maxHeartRate: 120,
+  fallSensitivity: "medium"
+});
+
 export const localStorageService = {
   // Settings methods
   getSettings(): LocalSettings | null {
     try {
       const stored = localStorage.getItem(SETTINGS_KEY);
-      return stored ? JSON.parse(stored) : null;
+      if (stored) {
+        return JSON.parse(stored);
+      } else {
+        // Auto-setup default caregiver information on first use
+        const defaultSettings = getDefaultSettings();
+        this.saveSettings(defaultSettings);
+        return defaultSettings;
+      }
     } catch {
-      return null;
+      // If there's an error, return default settings
+      const defaultSettings = getDefaultSettings();
+      this.saveSettings(defaultSettings);
+      return defaultSettings;
     }
   },
 

@@ -66,9 +66,15 @@ export function Settings({ onBack }: SettingsProps) {
       </div>
 
       {/* Caregiver Contact Settings */}
-      <Card className="card-modern">
+      <Card className="card-modern border-l-4 border-success bg-gradient-to-r from-green-50 to-emerald-50">
         <CardContent className="p-8">
-          <h3 className="elderly-text-lg font-semibold text-foreground mb-6">Emergency Contact</h3>
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="elderly-text-lg font-semibold text-foreground">Emergency Contact</h3>
+            <div className="flex items-center space-x-2 bg-white/80 px-3 py-1 rounded-full">
+              <div className="w-2 h-2 bg-success rounded-full"></div>
+              <span className="text-sm text-success font-semibold">Auto-Configured</span>
+            </div>
+          </div>
           <div className="space-y-4">
             <div>
               <Label className="block elderly-text font-medium text-gray-700 mb-2">

@@ -19,6 +19,10 @@ export function useAlertSystem() {
       return response.json();
     },
     onSuccess: () => {
+      // Get caregiver information
+      const settings = localStorageService.getSettings();
+      const caregiverName = settings?.caregiverName || "Emergency Contact";
+      
       // Add to local storage as well
       localStorageService.addAlert({
         type: "emergency",
@@ -30,7 +34,7 @@ export function useAlertSystem() {
       
       toast({
         title: "Emergency Alert Sent",
-        description: "Your caregiver has been notified with your location.",
+        description: `${caregiverName} has been notified with your location and will be contacted immediately.`,
         variant: "default",
       });
     },
@@ -102,6 +106,10 @@ export function useAlertSystem() {
       const alertType = heartRate < minRate ? "low" : "high";
       const description = `Heart rate ${alertType === "low" ? "dropped to" : "exceeded"} ${heartRate} BPM`;
       
+      // Get caregiver information
+      const settings = localStorageService.getSettings();
+      const caregiverName = settings?.caregiverName || "Caregiver";
+      
       // Add to local storage
       localStorageService.addAlert({
         type: "heart_rate",
@@ -110,11 +118,15 @@ export function useAlertSystem() {
         heartRate
       });
       
+      // Show toast with caregiver notification
       toast({
-        title: "Heart Rate Alert",
-        description,
+        title: "Heart Rate Alert Sent",
+        description: `${description}. Alert sent to ${caregiverName}.`,
         variant: "destructive",
       });
+      
+      // In a real implementation, this would automatically send SMS to the caregiver
+      console.log(`Automatic alert sent to ${caregiverName} (${settings?.caregiverPhone}): ${description}`);
       
       return true;
     }

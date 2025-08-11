@@ -32,7 +32,7 @@ function App() {
             onViewChange={setCurrentView}
           />
           
-          <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+          <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 pb-24">
             {renderCurrentView()}
           </main>
         </div>

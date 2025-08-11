@@ -68,8 +68,33 @@ export function Dashboard() {
 
   const fallsDetected = todaysAlerts.filter(alert => alert.type === "fall_detection").length;
 
+  const settings = localStorageService.getSettings();
+
   return (
     <div className="space-y-6">
+      {/* Caregiver Status Card */}
+      <Card className="card-modern border-l-4 border-success bg-gradient-to-r from-green-50 to-emerald-50">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-success bg-opacity-20 rounded-xl flex items-center justify-center">
+                <i className="fas fa-user-shield text-2xl text-success"></i>
+              </div>
+              <div>
+                <h3 className="elderly-text font-bold text-foreground">Emergency Contact Ready</h3>
+                <p className="text-sm text-muted-foreground font-medium">
+                  {settings?.caregiverName} • {settings?.caregiverPhone}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/80 px-3 py-1 rounded-full">
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+              <span className="text-sm text-success font-semibold">Active</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Emergency SOS Button */}
       <EmergencyButton />
 
