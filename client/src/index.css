@@ -4,32 +4,32 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(210 25% 7.8431%);
+  --background: hsl(210 20% 98%);
+  --foreground: hsl(215 25% 15%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(210 25% 7.8431%);
+  --card-foreground: hsl(215 25% 15%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(210 25% 7.8431%);
-  --primary: hsl(210 79.3% 46.3%);
+  --popover-foreground: hsl(215 25% 15%);
+  --primary: hsl(221 83% 53%);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(120 39.0% 54.3%);
+  --secondary: hsl(142 76% 36%);
   --secondary-foreground: hsl(0 0% 100%);
-  --muted: hsl(240 1.9608% 90%);
-  --muted-foreground: hsl(210 25% 7.8431%);
-  --accent: hsl(36 100% 50%);
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215 20% 45%);
+  --accent: hsl(38 92% 50%);
   --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(4 69.7% 54.5%);
+  --destructive: hsl(0 84% 60%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(201.4286 30.4348% 90.9804%);
-  --input: hsl(200 23.0769% 97.4510%);
-  --ring: hsl(202.8169 89.1213% 53.1373%);
-  --success: hsl(120 60.8% 50%);
-  --warning: hsl(43 100% 50%);
-  --critical: hsl(4 90% 58%);
+  --border: hsl(214 32% 91%);
+  --input: hsl(214 32% 91%);
+  --ring: hsl(221 83% 53%);
+  --success: hsl(142 76% 36%);
+  --warning: hsl(38 92% 50%);
+  --critical: hsl(0 84% 60%);
   --font-sans: 'Inter', sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
-  --radius: 0.75rem;
+  --radius: 12px;
 }
 
 .dark {
@@ -69,22 +69,42 @@
 
 @layer components {
   .elderly-text {
-    @apply text-lg;
+    @apply text-lg leading-relaxed;
   }
   
   .elderly-text-lg {
-    @apply text-xl;
+    @apply text-xl leading-relaxed;
   }
   
   .elderly-text-xl {
-    @apply text-2xl;
+    @apply text-2xl leading-relaxed;
   }
   
   .elderly-button {
-    @apply py-4 px-6 text-lg font-semibold rounded-lg min-h-[60px];
+    @apply py-4 px-8 text-lg font-semibold rounded-xl min-h-[64px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] border-0;
   }
   
   .elderly-input {
-    @apply py-3 px-4 text-lg border-2 rounded-lg;
+    @apply py-4 px-5 text-lg border-2 rounded-xl transition-all duration-200 focus:ring-4 focus:ring-blue-100 focus:border-primary hover:border-blue-400;
+  }
+  
+  .card-modern {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300;
+  }
+  
+  .button-primary {
+    @apply bg-gradient-to-r from-primary to-blue-600 hover:from-primary hover:to-blue-700 text-white;
+  }
+  
+  .button-success {
+    @apply bg-gradient-to-r from-secondary to-green-600 hover:from-secondary hover:to-green-700 text-white;
+  }
+  
+  .button-warning {
+    @apply bg-gradient-to-r from-accent to-orange-500 hover:from-accent hover:to-orange-600 text-white;
+  }
+  
+  .button-critical {
+    @apply bg-gradient-to-r from-destructive to-red-600 hover:from-destructive hover:to-red-700 text-white;
   }
 }

@@ -66,9 +66,9 @@ export function Settings({ onBack }: SettingsProps) {
       </div>
 
       {/* Caregiver Contact Settings */}
-      <Card>
-        <CardContent className="p-6">
-          <h3 className="elderly-text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h3>
+      <Card className="card-modern">
+        <CardContent className="p-8">
+          <h3 className="elderly-text-lg font-semibold text-foreground mb-6">Emergency Contact</h3>
           <div className="space-y-4">
             <div>
               <Label className="block elderly-text font-medium text-gray-700 mb-2">
@@ -99,9 +99,9 @@ export function Settings({ onBack }: SettingsProps) {
             <Button 
               onClick={handleTestAlert}
               disabled={isTestPending || !settings.caregiverPhone}
-              className="elderly-button bg-accent hover:bg-orange-600 text-white font-semibold transition-colors"
+              className="elderly-button button-warning"
             >
-              <i className="fas fa-paper-plane mr-2"></i>
+              <i className="fas fa-paper-plane mr-3"></i>
               {isTestPending ? "Sending..." : "Send Test Alert"}
             </Button>
           </div>
@@ -109,9 +109,9 @@ export function Settings({ onBack }: SettingsProps) {
       </Card>
 
       {/* Health Monitoring Settings */}
-      <Card>
-        <CardContent className="p-6">
-          <h3 className="elderly-text-lg font-semibold text-gray-900 mb-4">Health Monitoring</h3>
+      <Card className="card-modern">
+        <CardContent className="p-8">
+          <h3 className="elderly-text-lg font-semibold text-foreground mb-6">Health Monitoring</h3>
           <div className="space-y-6">
             <div>
               <Label className="block elderly-text font-medium text-gray-700 mb-2">
@@ -167,13 +167,13 @@ export function Settings({ onBack }: SettingsProps) {
       </Card>
 
       {/* Save Settings Button */}
-      <Card>
-        <CardContent className="p-6">
+      <Card className="card-modern">
+        <CardContent className="p-8">
           <Button 
             onClick={handleSaveSettings}
-            className="w-full elderly-button bg-primary hover:bg-blue-700 text-white font-semibold elderly-text-lg transition-colors"
+            className="w-full elderly-button button-primary elderly-text-lg"
           >
-            <i className="fas fa-save mr-2"></i>
+            <i className="fas fa-save mr-3"></i>
             Save Settings
           </Button>
         </CardContent>

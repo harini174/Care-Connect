@@ -73,12 +73,14 @@ export function History({ onBack }: HistoryProps) {
       </div>
 
       {/* Alert History List */}
-      <Card>
+      <Card className="card-modern">
         <CardContent className="p-0">
           {allAlerts.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
-              <i className="fas fa-history text-4xl mb-4"></i>
-              <p className="elderly-text-lg">No alerts recorded yet</p>
+            <div className="p-16 text-center text-muted-foreground">
+              <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i className="fas fa-history text-3xl"></i>
+              </div>
+              <p className="elderly-text-lg font-semibold mb-2">No alerts recorded yet</p>
               <p className="elderly-text">Your alert history will appear here</p>
             </div>
           ) : (
@@ -87,34 +89,36 @@ export function History({ onBack }: HistoryProps) {
               return (
                 <div 
                   key={`${alert.id || index}-${alert.timestamp}`}
-                  className="p-6 border-b border-gray-200 last:border-b-0"
+                  className="p-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-colors"
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className={`w-12 h-12 ${alertStyle.color} bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0`}>
+                  <div className="flex items-start space-x-5">
+                    <div className={`w-14 h-14 ${alertStyle.color} bg-opacity-20 rounded-2xl flex items-center justify-center flex-shrink-0 border border-current/10`}>
                       <i className={`${alertStyle.icon} ${alertStyle.color} text-xl`}></i>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="elderly-text font-semibold text-gray-900 capitalize">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="elderly-text font-bold text-foreground capitalize">
                           {alert.type.replace("_", " ")} Alert
                         </h3>
-                        <span className="text-sm text-gray-500">
+                        <span className="text-sm text-muted-foreground font-medium bg-muted px-3 py-1 rounded-full">
                           {formatAlertTime(alert.timestamp)}
                         </span>
                       </div>
-                      <p className="elderly-text text-gray-600 mb-2">
+                      <p className="elderly-text text-muted-foreground mb-4 font-medium">
                         {alert.description}
                       </p>
-                      <div className="text-sm text-gray-500">
-                        <i className="fas fa-map-marker-alt mr-1"></i>
-                        <span>{alert.location}</span>
-                      </div>
-                      {alert.heartRate && (
-                        <div className="text-sm text-gray-500 mt-1">
-                          <i className="fas fa-heartbeat mr-1"></i>
-                          <span>{alert.heartRate} BPM</span>
+                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <i className="fas fa-map-marker-alt text-accent"></i>
+                          <span className="font-medium">{alert.location}</span>
                         </div>
-                      )}
+                        {alert.heartRate && (
+                          <div className="flex items-center gap-2">
+                            <i className="fas fa-heartbeat text-success"></i>
+                            <span className="font-medium">{alert.heartRate} BPM</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

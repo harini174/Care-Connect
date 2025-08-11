@@ -41,29 +41,29 @@ export function HealthCard({
   };
 
   return (
-    <Card className={cn("border-l-4", statusColors[status])}>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="elderly-text-lg font-semibold text-gray-900">{title}</h2>
+    <Card className={cn("card-modern border-l-4", statusColors[status])}>
+      <CardContent className="p-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="elderly-text-lg font-semibold text-foreground">{title}</h2>
           {isLive && (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 bg-white/80 px-3 py-1 rounded-full">
               <div className={cn("w-3 h-3 rounded-full animate-pulse", statusBgColors[status])}></div>
-              <span className={cn("text-sm font-medium", statusTextColors[status])}>Live</span>
+              <span className={cn("text-sm font-semibold", statusTextColors[status])}>Live</span>
             </div>
           )}
         </div>
 
         <div className="text-center">
-          <div className="text-6xl font-bold text-gray-900 mb-2">
+          <div className="text-7xl font-bold text-foreground mb-3 tracking-tight">
             {value}
           </div>
           {unit && (
-            <div className="elderly-text text-gray-600 mb-4">{unit}</div>
+            <div className="elderly-text text-muted-foreground mb-6 font-medium">{unit}</div>
           )}
           {subtitle && (
-            <div className="flex items-center justify-center space-x-2">
+            <div className="flex items-center justify-center space-x-3 bg-white/60 px-4 py-2 rounded-full">
               <div className={cn("w-4 h-4 rounded-full", statusBgColors[status])}></div>
-              <span className={cn("elderly-text font-medium", statusTextColors[status])}>
+              <span className={cn("elderly-text font-semibold", statusTextColors[status])}>
                 {subtitle}
               </span>
             </div>
@@ -71,7 +71,7 @@ export function HealthCard({
         </div>
 
         {lastUpdate && (
-          <div className="mt-4 text-sm text-gray-500 text-right">
+          <div className="mt-6 text-sm text-muted-foreground text-center font-medium">
             Last updated: {lastUpdate}
           </div>
         )}

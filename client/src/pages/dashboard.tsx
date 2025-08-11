@@ -88,28 +88,28 @@ export function Dashboard() {
         />
 
         {/* Fall Detection Card */}
-        <Card className="border-l-4 border-primary">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="elderly-text-lg font-semibold text-gray-900">Fall Detection</h2>
-              <div className="flex items-center space-x-2">
+        <Card className="card-modern border-l-4 border-primary bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardContent className="p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="elderly-text-lg font-semibold text-foreground">Fall Detection</h2>
+              <div className="flex items-center space-x-2 bg-white/80 px-3 py-1 rounded-full">
                 <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-sm text-primary font-medium">Active</span>
+                <span className="text-sm text-primary font-semibold">Active</span>
               </div>
             </div>
             <div className="text-center">
-              <div className="w-20 h-20 bg-success bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-shield-alt text-3xl text-success"></i>
+              <div className="w-24 h-24 bg-success bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-success/20">
+                <i className="fas fa-shield-alt text-4xl text-success"></i>
               </div>
-              <div className="elderly-text-lg font-bold text-success mb-2">
+              <div className="elderly-text-lg font-bold text-success mb-3">
                 {healthData.fallDetectionActive ? "Protection Active" : "Detection Disabled"}
               </div>
-              <div className="elderly-text text-gray-600">
+              <div className="elderly-text text-muted-foreground font-medium">
                 {healthData.fallDetectionActive ? "Monitoring for falls" : "Fall detection is off"}
               </div>
             </div>
-            <div className="mt-4 text-sm text-gray-500">
-              <div className="flex justify-between">
+            <div className="mt-6 text-sm text-muted-foreground bg-white/60 p-4 rounded-xl">
+              <div className="flex justify-between font-medium">
                 <span>Sensitivity: Medium</span>
                 <span>Last check: {formatLastUpdate(healthData.lastUpdate)}</span>
               </div>
@@ -119,26 +119,32 @@ export function Dashboard() {
       </div>
 
       {/* Quick Status Overview */}
-      <Card>
-        <CardContent className="p-6">
-          <h2 className="elderly-text-lg font-semibold text-gray-900 mb-4">Today's Summary</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-success bg-opacity-10 rounded-lg">
-              <i className="fas fa-heartbeat text-2xl text-success mb-2"></i>
-              <div className="elderly-text font-semibold text-gray-900">
+      <Card className="card-modern bg-gradient-to-r from-gray-50 to-slate-50">
+        <CardContent className="p-8">
+          <h2 className="elderly-text-lg font-semibold text-foreground mb-6">Today's Summary</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-success/20 hover:shadow-lg transition-all">
+              <div className="w-12 h-12 bg-success bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-heartbeat text-2xl text-success"></i>
+              </div>
+              <div className="elderly-text font-bold text-foreground mb-1">
                 {avgHeartRate ? `${Math.round(avgHeartRate)} BPM` : `${healthData.heartRate} BPM`}
               </div>
-              <div className="text-sm text-gray-600">Avg Heart Rate</div>
+              <div className="text-sm text-muted-foreground font-medium">Avg Heart Rate</div>
             </div>
-            <div className="text-center p-4 bg-primary bg-opacity-10 rounded-lg">
-              <i className="fas fa-shield-alt text-2xl text-primary mb-2"></i>
-              <div className="elderly-text font-semibold text-gray-900">{fallsDetected}</div>
-              <div className="text-sm text-gray-600">Falls Detected</div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-primary/20 hover:shadow-lg transition-all">
+              <div className="w-12 h-12 bg-primary bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-shield-alt text-2xl text-primary"></i>
+              </div>
+              <div className="elderly-text font-bold text-foreground mb-1">{fallsDetected}</div>
+              <div className="text-sm text-muted-foreground font-medium">Falls Detected</div>
             </div>
-            <div className="text-center p-4 bg-accent bg-opacity-10 rounded-lg">
-              <i className="fas fa-bell text-2xl text-accent mb-2"></i>
-              <div className="elderly-text font-semibold text-gray-900">{todaysAlerts.length}</div>
-              <div className="text-sm text-gray-600">Alerts Sent</div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-accent/20 hover:shadow-lg transition-all">
+              <div className="w-12 h-12 bg-accent bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-bell text-2xl text-accent"></i>
+              </div>
+              <div className="elderly-text font-bold text-foreground mb-1">{todaysAlerts.length}</div>
+              <div className="text-sm text-muted-foreground font-medium">Alerts Sent</div>
             </div>
           </div>
         </CardContent>
