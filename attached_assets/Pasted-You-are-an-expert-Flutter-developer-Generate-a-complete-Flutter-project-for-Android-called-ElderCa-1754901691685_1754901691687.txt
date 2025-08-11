@@ -1,0 +1,53 @@
+You are an expert Flutter developer. Generate a complete Flutter project for Android called "ElderCare Alert" with these features:
+
+1. **Fall Detection**:
+   - Use `sensors_plus` to read accelerometer data.
+   - If the total acceleration magnitude exceeds 15 m/s², trigger a fall alert.
+
+2. **Heart Rate Monitoring**:
+   - Use `flutter_blue_plus` to connect to a Bluetooth heart rate monitor.
+   - Show live heart rate on the home screen.
+   - If heart rate < 50 bpm or > 120 bpm, trigger an alert.
+
+3. **Twilio SMS Alerts**:
+   - Use `twilio_flutter` to send an SMS to a saved caregiver number.
+   - SMS should include:
+     - Type of alert (Fall or Abnormal Heart Rate)
+     - GPS location from the `location` package
+     - Date and time of the alert.
+
+4. **Caregiver Settings**:
+   - Settings screen to save caregiver phone number in `shared_preferences`.
+   - Option to test SMS sending.
+
+5. **Alert History**:
+   - Store past alerts (type, date/time, location) using `hive` for local storage.
+   - Display in a history screen using a ListView.
+
+6. **UI Requirements**:
+   - Large buttons and text for elderly accessibility.
+   - Home screen must show:
+     - Live heart rate
+     - Fall detection status
+     - Big red SOS button to send a manual alert.
+
+7. **Folder Structure**:
+   - lib/screens/
+     - home_screen.dart
+     - settings_screen.dart
+     - history_screen.dart
+   - lib/services/
+     - fall_detection_service.dart
+     - heart_rate_service.dart
+     - sms_service.dart
+     - location_service.dart
+   - lib/models/
+     - alert_model.dart
+   - main.dart
+
+**Additional Requirements**:
+- Use Dart null safety.
+- Include comments for key functions.
+- Use dummy Twilio credentials and simulated heart rate if no device is connected.
+- Add all dependencies in `pubspec.yaml` so the app runs after `flutter pub get`.
+- Code must be complete, so that when I click "Run" in Replit or download the ZIP and run it locally, the app works without syntax errors.
