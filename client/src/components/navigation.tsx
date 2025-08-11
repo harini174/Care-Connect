@@ -22,7 +22,7 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <i className="fas fa-heartbeat text-white text-lg"></i>
               </div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">ElderCare Alert</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Care Connect</h1>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>

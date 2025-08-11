@@ -1,8 +1,8 @@
-# ElderCare Alert - Health Monitoring Dashboard
+# Care Connect - Health Monitoring Dashboard
 
 ## Overview
 
-ElderCare Alert is a comprehensive health monitoring web application designed specifically for elderly users. The system provides real-time health tracking with emergency alert capabilities, featuring an accessible interface with large buttons and clear visual indicators. The application monitors heart rate, detects potential fall events, and can send emergency alerts to designated caregivers with location information.
+Care Connect is a comprehensive health monitoring web application designed specifically for elderly users. The system provides real-time health tracking with emergency alert capabilities, featuring an accessible interface with large buttons and clear visual indicators. The application monitors heart rate, detects potential fall events, and can send emergency alerts to designated caregivers with location information.
 
 The system combines a React-based frontend with an Express.js backend, utilizing PostgreSQL for data persistence and Drizzle ORM for database operations. The architecture prioritizes simplicity and reliability, with both client-side and server-side data storage to ensure functionality even during network interruptions.
 

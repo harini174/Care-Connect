@@ -15,8 +15,8 @@ export interface LocalAlert {
   heartRate?: number;
 }
 
-const SETTINGS_KEY = 'eldercare-settings';
-const ALERTS_KEY = 'eldercare-alerts';
+const SETTINGS_KEY = 'careconnect-settings';
+const ALERTS_KEY = 'careconnect-alerts';
 
 export const localStorageService = {
   // Settings methods
