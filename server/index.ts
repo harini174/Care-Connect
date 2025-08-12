@@ -55,7 +55,7 @@ app.use((req, res, next) => {
   const port = parseInt(process.env.PORT || "5000", 10);
   const host = "127.0.0.1";
 
-  // Fixed: Removed reusePort, used normal listen syntax
+  
   server.listen(port, host, () => {
     log(`Server running at http://${host}:${port}`);
   });
