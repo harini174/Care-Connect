@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElderCare Alert - Health Monitoring Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#1976D2',
+                        secondary: '#388E3C',
+                        accent: '#F57C00',
+                        error: '#D32F2F',
+                        success: '#4CAF50',
+                        warning: '#FF9800',
+                        critical: '#F44336'
+                    },
+                    fontSize: {
+                        'elderly': '18px',
+                        'elderly-lg': '24px',
+                        'elderly-xl': '32px'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- @COMPONENT: MainApp -->
+    <div class="min-h-screen bg-gray-50" data-mock="true">
+        <!-- Navigation Header -->
+        <!-- @COMPONENT: NavigationHeader -->
+        <header class="bg-white shadow-sm border-b-2 border-gray-100 sticky top-0 z-40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <div class="flex items-center justify-between h-16 sm:h-20">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heartbeat text-white text-lg"></i>
+                        </div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900">ElderCare Alert</h1>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-success rounded-full animate-pulse"></div>
+                        <span class="text-sm text-gray-600 hidden sm:inline">Connected</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- @END_COMPONENT: NavigationHeader -->
+
+        <!-- Main Content Area -->
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+            <!-- @COMPONENT: HealthDashboard -->
+            <div id="dashboard-view" class="space-y-6">
+                <!-- Emergency SOS Button -->
+                <!-- @COMPONENT: EmergencySOSButton -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-error">
+                    <div class="text-center">
+                        <button 
+                            class="w-full sm:w-auto bg-error hover:bg-red-700 text-white font-bold py-6 px-12 rounded-xl text-elderly-xl shadow-lg transform hover:scale-105 transition-all duration-200 min-h-[80px] border-4 border-red-800"
+                            data-event="click:handleEmergencyAlert"
+                            data-implementation="Should immediately trigger emergency alert with GPS location"
+                            aria-label="Emergency SOS Button - Press to send immediate help alert">
+                            <i class="fas fa-phone text-3xl mb-2"></i>
+                            <div>EMERGENCY SOS</div>
+                            <div class="text-lg font-normal">Press for Help</div>
+                        </button>
+                    </div>
+                    <p class="text-center text-gray-600 text-elderly mt-4">
+                        This will immediately alert your caregiver with your location
+                    </p>
+                </div>
+                <!-- @END_COMPONENT: EmergencySOSButton -->
+
+                <!-- Real-time Health Monitoring -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Heart Rate Monitoring Card -->
+                    <!-- @COMPONENT: HeartRateCard -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-success">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-elderly-lg font-semibold text-gray-900">Heart Rate</h2>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-success rounded-full animate-pulse"></div>
+                                <span class="text-sm text-success font-medium">Live</span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-6xl font-bold text-gray-900 mb-2" data-bind="currentHeartRate">
+                                <span data-mock="true">78</span>
+                            </div>
+                            <div class="text-elderly text-gray-600 mb-4">BPM</div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <div class="w-4 h-4 bg-success rounded-full"></div>
+                                <span class="text-elderly font-medium text-success">Normal Range</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-500">
+                            <div class="flex justify-between">
+                                <span>Target: 50-120 BPM</span>
+                                <span>Last updated: <span data-bind="lastHeartRateUpdate" data-mock="true">Now</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: HeartRateCard -->
+
+                    <!-- Fall Detection Card -->
+                    <!-- @COMPONENT: FallDetectionCard -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-primary">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-elderly-lg font-semibold text-gray-900">Fall Detection</h2>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                                <span class="text-sm text-primary font-medium">Active</span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-success bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shield-alt text-3xl text-success"></i>
+                            </div>
+                            <div class="text-elderly-lg font-bold text-success mb-2">Protection Active</div>
+                            <div class="text-elderly text-gray-600">Monitoring for falls</div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-500">
+                            <div class="flex justify-between">
+                                <span>Sensitivity: <span data-bind="fallSensitivity" data-mock="true">Medium</span></span>
+                                <span>Last check: <span data-bind="lastFallCheck" data-mock="true">Now</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: FallDetectionCard -->
+                </div>
+
+                <!-- Quick Status Overview -->
+                <!-- @COMPONENT: QuickStatusOverview -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-elderly-lg font-semibold text-gray-900 mb-4">Today's Summary</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="text-center p-4 bg-success bg-opacity-10 rounded-lg">
+                            <i class="fas fa-heartbeat text-2xl text-success mb-2"></i>
+                            <div class="text-elderly font-semibold text-gray-900" data-bind="avgHeartRate" data-mock="true">76 BPM</div>
+                            <div class="text-sm text-gray-600">Avg Heart Rate</div>
+                        </div>
+                        <div class="text-center p-4 bg-primary bg-opacity-10 rounded-lg">
+                            <i class="fas fa-shield-alt text-2xl text-primary mb-2"></i>
+                            <div class="text-elderly font-semibold text-gray-900" data-bind="fallsDetected" data-mock="true">0</div>
+                            <div class="text-sm text-gray-600">Falls Detected</div>
+                        </div>
+                        <div class="text-center p-4 bg-accent bg-opacity-10 rounded-lg">
+                            <i class="fas fa-bell text-2xl text-accent mb-2"></i>
+                            <div class="text-elderly font-semibold text-gray-900" data-bind="alertsSent" data-mock="true">0</div>
+                            <div class="text-sm text-gray-600">Alerts Sent</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: QuickStatusOverview -->
+            </div>
+
+            <!-- Settings View -->
+            <!-- @COMPONENT: SettingsView -->
+            <div id="settings-view" class="space-y-6 hidden">
+                <div class="flex items-center space-x-3 mb-6">
+                    <button 
+                        class="p-2 text-gray-600 hover:text-gray-900"
+                        data-event="click:showDashboard"
+                        aria-label="Back to Dashboard">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    <h2 class="text-elderly-xl font-bold text-gray-900">Settings</h2>
+                </div>
+
+                <!-- Caregiver Contact Settings -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-elderly-lg font-semibold text-gray-900 mb-4">Emergency Contact</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-elderly font-medium text-gray-700 mb-2">
+                                Caregiver Name
+                            </label>
+                            <input 
+                                type="text" 
+                                class="w-full px-4 py-3 text-elderly border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-0"
+                                placeholder="Enter caregiver name"
+                                data-bind="caregiverName"
+                                data-mock="true"
+                                value="Sarah Johnson"
+                                aria-label="Caregiver Name">
+                        </div>
+                        <div>
+                            <label class="block text-elderly font-medium text-gray-700 mb-2">
+                                Phone Number
+                            </label>
+                            <input 
+                                type="tel" 
+                                class="w-full px-4 py-3 text-elderly border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-0"
+                                placeholder="Enter phone number"
+                                data-bind="caregiverPhone"
+                                data-mock="true"
+                                value="+1 (555) 123-4567"
+                                aria-label="Caregiver Phone Number">
+                        </div>
+                        <button 
+                            class="w-full sm:w-auto bg-accent hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg text-elderly transition-colors"
+                            data-event="click:testSMSAlert"
+                            data-implementation="Should send test SMS to caregiver">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Test Alert
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Health Monitoring Settings -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-elderly-lg font-semibold text-gray-900 mb-4">Health Monitoring</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-elderly font-medium text-gray-700 mb-2">
+                                Heart Rate Alert Thresholds
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Minimum (BPM)</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-4 py-3 text-elderly border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-0"
+                                        data-bind="minHeartRate"
+                                        data-mock="true"
+                                        value="50"
+                                        aria-label="Minimum Heart Rate Threshold">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Maximum (BPM)</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-4 py-3 text-elderly border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-0"
+                                        data-bind="maxHeartRate"
+                                        data-mock="true"
+                                        value="120"
+                                        aria-label="Maximum Heart Rate Threshold">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-elderly font-medium text-gray-700 mb-2">
+                                Fall Detection Sensitivity
+                            </label>
+                            <select 
+                                class="w-full px-4 py-3 text-elderly border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-0"
+                                data-bind="fallSensitivity"
+                                aria-label="Fall Detection Sensitivity">
+                                <option value="low">Low</option>
+                                <option value="medium" selected data-mock="true">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Settings Button -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <button 
+                        class="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg text-elderly-lg transition-colors"
+                        data-event="click:saveSettings"
+                        data-implementation="Should save all settings to localStorage">
+                        <i class="fas fa-save mr-2"></i>
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: SettingsView -->
+
+            <!-- Alert History View -->
+            <!-- @COMPONENT: AlertHistoryView -->
+            <div id="history-view" class="space-y-6 hidden">
+                <div class="flex items-center space-x-3 mb-6">
+                    <button 
+                        class="p-2 text-gray-600 hover:text-gray-900"
+                        data-event="click:showDashboard"
+                        aria-label="Back to Dashboard">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    <h2 class="text-elderly-xl font-bold text-gray-900">Alert History</h2>
+                </div>
+
+                <!-- Alert History List -->
+                <div class="bg-white rounded-xl shadow-lg">
+                    <!-- @MAP: alertHistory.map(alert => ( -->
+                    <div class="p-6 border-b border-gray-200 last:border-b-0" data-mock="true">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-warning bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heart text-warning text-xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-elderly font-semibold text-gray-900" data-bind="alert.type">Heart Rate Alert</h3>
+                                    <span class="text-sm text-gray-500" data-bind="alert.time">2 hours ago</span>
+                                </div>
+                                <p class="text-elderly text-gray-600 mb-2" data-bind="alert.description">
+                                    Heart rate exceeded 130 BPM
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    <span data-bind="alert.location">123 Main St, Anytown, ST 12345</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+
+                    <div class="p-6 border-b border-gray-200" data-mock="true">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user-shield text-primary text-xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-elderly font-semibold text-gray-900">Manual SOS Alert</h3>
+                                    <span class="text-sm text-gray-500">Yesterday</span>
+                                </div>
+                                <p class="text-elderly text-gray-600 mb-2">
+                                    Emergency SOS button pressed
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    <span>456 Oak Ave, Somewhere, ST 67890</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6" data-mock="true">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-success bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-success text-xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-elderly font-semibold text-gray-900">Test Alert Successful</h3>
+                                    <span class="text-sm text-gray-500">3 days ago</span>
+                                </div>
+                                <p class="text-elderly text-gray-600 mb-2">
+                                    Test SMS sent successfully to caregiver
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-phone mr-1"></i>
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State (when no alerts) -->
+                    <!-- <div class="p-12 text-center text-gray-500 hidden" data-implementation="Show when alertHistory is empty">
+                        <i class="fas fa-history text-4xl mb-4"></i>
+                        <p class="text-elderly-lg">No alerts recorded yet</p>
+                        <p class="text-elderly">Your alert history will appear here</p>
+                    </div> -->
+                </div>
+            </div>
+            <!-- @END_COMPONENT: AlertHistoryView -->
+        </main>
+
+        <!-- Bottom Navigation -->
+        <!-- @COMPONENT: BottomNavigation -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 px-4 py-2 z-30">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-3 gap-1">
+                    <button 
+                        class="nav-button flex flex-col items-center py-3 px-2 text-primary bg-primary bg-opacity-10 rounded-lg transition-colors"
+                        data-event="click:showDashboard"
+                        data-implementation="Should show dashboard view and update active state"
+                        aria-label="Dashboard">
+                        <i class="fas fa-home text-2xl mb-1"></i>
+                        <span class="text-sm font-medium">Dashboard</span>
+                    </button>
+                    <button 
+                        class="nav-button flex flex-col items-center py-3 px-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                        data-event="click:showSettings"
+                        data-implementation="Should show settings view and update active state"
+                        aria-label="Settings">
+                        <i class="fas fa-cog text-2xl mb-1"></i>
+                        <span class="text-sm font-medium">Settings</span>
+                    </button>
+                    <button 
+                        class="nav-button flex flex-col items-center py-3 px-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                        data-event="click:showHistory"
+                        data-implementation="Should show history view and update active state"
+                        aria-label="History">
+                        <i class="fas fa-history text-2xl mb-1"></i>
+                        <span class="text-sm font-medium">History</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- @END_COMPONENT: BottomNavigation -->
+
+        <!-- Bottom padding to account for fixed nav -->
+        <div class="h-20"></div>
+    </div>
+    <!-- @END_COMPONENT: MainApp -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            'use strict';
+            
+            // @STATE: currentView:string = 'dashboard'
+            let currentView = 'dashboard';
+            
+            // @STATE: healthData:object with heart rate and fall detection status
+            let healthData = {
+                heartRate: 78,
+                fallDetectionActive: true,
+                lastUpdate: new Date()
+            };
+
+            // Navigation functionality
+            function showView(viewName) {
+                // Hide all views
+                document.getElementById('dashboard-view').classList.add('hidden');
+                document.getElementById('settings-view').classList.add('hidden');
+                document.getElementById('history-view').classList.add('hidden');
+                
+                // Show selected view
+                document.getElementById(viewName + '-view').classList.remove('hidden');
+                
+                // Update navigation active states
+                const navButtons = document.querySelectorAll('.nav-button');
+                navButtons.forEach(button => {
+                    button.classList.remove('text-primary', 'bg-primary', 'bg-opacity-10');
+                    button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:bg-gray-100');
+                });
+                
+                // Set active button
+                const activeButton = document.querySelector(`[data-event="click:show${viewName.charAt(0).toUpperCase() + viewName.slice(1)}"]`);
+                if (activeButton) {
+                    activeButton.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:bg-gray-100');
+                    activeButton.classList.add('text-primary', 'bg-primary', 'bg-opacity-10');
+                }
+                
+                currentView = viewName;
+            }
+
+            // Event listeners for navigation
+            document.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-event]');
+                if (!target) return;
+                
+                const event = target.getAttribute('data-event');
+                
+                if (event === 'click:showDashboard') {
+                    showView('dashboard');
+                } else if (event === 'click:showSettings') {
+                    showView('settings');
+                } else if (event === 'click:showHistory') {
+                    showView('history');
+                } else if (event === 'click:handleEmergencyAlert') {
+                    handleEmergencyAlert();
+                } else if (event === 'click:testSMSAlert') {
+                    handleTestAlert();
+                } else if (event === 'click:saveSettings') {
+                    handleSaveSettings();
+                }
+            });
+
+            // Emergency alert handler
+            function handleEmergencyAlert() {
+                // TODO: Implement GPS location retrieval
+                // TODO: Send SMS alert via Twilio
+                // TODO: Log alert to history
+                
+                // Mock implementation
+                if (confirm('Are you sure you want to send an emergency alert to your caregiver?')) {
+                    alert('Emergency alert sent! Your caregiver has been notified with your location.');
+                    
+                    // TODO: Add to alert history in localStorage
+                    console.log('Emergency alert triggered at:', new Date().toISOString());
+                }
+            }
+
+            // Test alert handler
+            function handleTestAlert() {
+                // TODO: Send test SMS
+                alert('Test alert sent successfully to your caregiver!');
+                console.log('Test alert sent');
+            }
+
+            // Settings save handler
+            function handleSaveSettings() {
+                // TODO: Save settings to localStorage
+                alert('Settings saved successfully!');
+                console.log('Settings saved');
+            }
+
+            // Simulate heart rate updates
+            function updateHeartRate() {
+                // TODO: Replace with real sensor data
+                const variation = Math.floor(Math.random() * 10) - 5; // ±5 BPM variation
+                healthData.heartRate = Math.max(60, Math.min(100, 78 + variation));
+                healthData.lastUpdate = new Date();
+                
+                // Update UI (in real implementation, this would use React state)
+                console.log('Heart rate updated:', healthData.heartRate);
+            }
+
+            // Initialize app
+            function initializeApp() {
+                showView('dashboard');
+                
+                // Start heart rate simulation
+                setInterval(updateHeartRate, 5000); // Update every 5 seconds
+                
+                console.log('ElderCare Alert app initialized');
+            }
+
+            // Initialize when DOM is loaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initializeApp);
+            } else {
+                initializeApp();
+            }
+
+            // @FUNCTIONALITY: This app should implement real-time health monitoring using device sensors
+            // @FUNCTIONALITY: GPS location should be retrieved for emergency alerts
+            // @FUNCTIONALITY: SMS alerts should be sent via Twilio API integration
+            // @FUNCTIONALITY: Settings and alert history should persist in localStorage
+        })();
+    </script>
+</body>
+</html>
